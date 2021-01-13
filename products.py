@@ -4,6 +4,7 @@ while True:
 	if name == 'q':
 		break
 	price = input('請輸入商品價格: ')
+	price = int(price)
 	products.append([name, price])
 print(products)
 
@@ -12,4 +13,4 @@ for product in products:
 
 with open ('products.csv', 'w') as f: # 存csv檔可以用EXCEL開啟，要用逗點隔開
 	for p in products:
-		f.write(p[0] + ',' + p[1] + '\n')
+		f.write(p[0] + ',' + str(p[1]) + '\n')

@@ -1,3 +1,13 @@
+import os # operating system
+if os.path.isfile('products.csv'):
+	print('找到檔案了')
+else:
+	print('找不到檔案')
+
+
+
+
+
 # 讀取檔案
 products = []
 with open('products.csv', 'r', encoding='utf-8') as f:

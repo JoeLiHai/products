@@ -1,19 +1,16 @@
 # 檢查是否有相同檔名的檔案
 import os
 
-# 檢查檔案是否存在，是的話，就開啟檔案，並把每一列的商品名稱及對應的商品價格作為一個列表，再放進products列表中
-def file_check(filename):
-	products =[]
-	if os.path.isfile(filename):
-		with open (filename, 'r') as f:
-			for line in f:
-				if '商品名稱, 商品價格' in line:
-					continue
-				pd_name, pd_price = line.strip().split(',')
-				products.append([pd_name, pd_price])
+# 讀取檔案
+def read_file(filename):
+	products = []
+	with open (filename, 'r') as f:
+		for line in f:
+			if '商品名稱, 商品價格' in line:
+				continue
+			pd_name, pd_price = line.strip().split(',')
+			products.append([pd_name, pd_price])
 		print('找到檔案，初始資料為: ', products)
-	else:
-		print('沒有這個檔案，請輸入資料重新建立! ')
 	return products
 
 # 讓使用者輸入資料
@@ -39,8 +36,15 @@ def save_file(filename, products):
 		for data in products:
 			f.write(data[0] + ', ' + data[1] + '\n')
 
+def main(filename):
+	if os.path.isfile(filename):
+		products = read_file(filename)
+	else:
+		print('沒有這個檔案，請輸入資料重新建立! ')
+		products = []
+	products = input_data(products)
+	print_file(products)
+	save_file('products_practice.csv', products)
 
-products = file_check('products_practice.csv')
-products = input_data(products)
-print_file(products)
-save_file('products_practice.csv', products)
+
+main('products_practice.csv')
